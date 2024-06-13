@@ -1,9 +1,10 @@
+import Navbar from "./components/navbar/Navbar";
 
 function App () {
-  
+
   return (
-    <div >
-      TRIDENTE GYM
+    <div className=" text-black overflow-x-hidden dark:bg-black">
+      <Navbar />
     </div>
   );
 };
