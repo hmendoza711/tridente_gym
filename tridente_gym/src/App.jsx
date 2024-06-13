@@ -6,7 +6,6 @@ function App() {
       <div>
          TRIDENTE_GYM
       </div>
-
     </>
   )
 }

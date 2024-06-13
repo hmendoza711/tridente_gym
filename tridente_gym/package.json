@@ -1,5 +1,5 @@
 {
-  "name": "tridente_gym",
+  "name": "gym_tridente",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,15 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "aos": "^2.3.4",
-    "autoprefixer": "^10.4.19",
-    "framer-motion": "^11.2.10",
-    "postcss": "^8.4.38",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^5.2.1",
-    "react-slick": "^0.30.2",
-    "slick-carousel": "^1.8.1"
+    "react-icons": "^5.2.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
