@@ -1,13 +1,11 @@
 
-function App() {
- 
+function App () {
+  
   return (
-    <>
-      <div>
-         TRIDENTE_GYM
-      </div>
-    </>
-  )
-}
+    <div >
+      TRIDENTE GYM
+    </div>
+  );
+};
 
-export default App
+export default App;
