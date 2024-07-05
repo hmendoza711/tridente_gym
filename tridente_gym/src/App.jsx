@@ -11,6 +11,8 @@ import Login from "./components/login/Login";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthenticationContextProvider } from "./services/authenticationContext/AuthenticationContext";
 import Register from "./components/login/Register";
+import ManageUsers from "./components/manageUser/ManageUser";
+import ProtectedRoute from "./components/route/protected/ProtectedRoute";
 
 function App() {
   useEffect(() => {
@@ -53,7 +55,7 @@ function App() {
           <Routes>
             <Route path="/" element={<MainContent />} />
             <Route path="/contacto" element={<Contacto />} />
-            <Route path="/clases" element={<Clases />} />
+            <Route path="/clases" element={<ProtectedRoute component={ManageUsers} />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Routes>

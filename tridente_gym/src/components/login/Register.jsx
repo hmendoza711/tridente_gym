@@ -1,8 +1,6 @@
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { db } from '../../firebase/config';
-
-
 
 const Register = () => {
   const [password, setPassword] = useState('');
@@ -11,11 +9,26 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
+    // Validación de campos vacíos
+    if (email.trim() === '' || password.trim() === '') { //el trim elimina los espacios vacios
+      alert('Por favor, complete todos los campos.');
+      return;
+    }
+
     try {
+      // Verificar si el correo ya existe
+      const q = query(collection(db, 'users'), where('email', '==', email));
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        alert('Ya existe un usuario con este correo');
+        return;
+      }
+
       // Crear el usuario
       const docRef = await addDoc(collection(db, 'users'), {
         email,
-        password
+        password,
+        rol: 'user',
       });
       console.log('Usuario creado con ID:', docRef.id);
 
