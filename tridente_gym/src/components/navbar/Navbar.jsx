@@ -1,23 +1,23 @@
-import React, { useContext, useState } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
-import Logo from "../../../public/logo.png";
-import { AuthenticationContext } from "../../services/authenticationContext/AuthenticationContext";
+import React, { useContext, useState } from 'react';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import Logo from '../../../public/logo.png';
+import { AuthenticationContext } from '../../services/authenticationContext/AuthenticationContext';
 
 const Navlinks = [
   {
     id: 1,
-    name: "INICIO",
-    link: "/",
+    name: 'INICIO',
+    link: '/',
   },
   {
     id: 2,
-    name: "CONTACTO",
-    link: "#contacto",
+    name: 'CONTACTO',
+    link: '#contacto',
   },
 ];
 
 const Navbar = () => {
-  const { isAdmin, user, handleLogout } = useContext(AuthenticationContext);
+  const { isAdmin, isProfe, user, handleLogout } = useContext(AuthenticationContext);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -25,11 +25,11 @@ const Navbar = () => {
   };
 
   const handleNavClick = (link) => {
-    if (link.startsWith("#")) {
+    if (link.startsWith('#')) {
       const targetId = link.substring(1);
       const targetElement = document.getElementById(targetId);
       if (targetElement) {
-        targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     } else {
       window.location.href = link;
@@ -66,7 +66,7 @@ const Navbar = () => {
       </button>
       <ul
         className={`md:flex md:items-center md:w-auto ${
-          menuOpen ? "block" : "hidden"
+          menuOpen ? 'block' : 'hidden'
         } md:block`}
       >
         {Navlinks.map(({ id, name, link }) => (
@@ -80,23 +80,43 @@ const Navbar = () => {
             </a>
           </li>
         ))}
+        {(isAdmin || isProfe) && (
+          <li className="py-2 px-4">
+            <a
+              href="/clases"
+              className="text-xl font-bold text-white hover:text-primary duration-300"
+              onClick={() => handleNavClick('/clases')}
+            >
+              CLASES
+            </a>
+          </li>
+        )}
         {isAdmin && (
           <li className="py-2 px-4">
             <a
               href="/usuarios"
               className="text-xl font-bold text-white hover:text-primary duration-300"
-              onClick={() => handleNavClick("/usuarios")}
+              onClick={() => handleNavClick('/usuarios')}
             >
               USUARIOS
+            </a>
+          </li>
+        )}
+        {!isAdmin && !isProfe && user && (
+          <li className="py-2 px-4">
+            <a
+              href="/cart"
+              className="text-xl font-bold text-white hover:text-primary duration-300"
+              onClick={() => handleNavClick('/cart')}
+            >
+              MIS ACTIVIDADES
             </a>
           </li>
         )}
         {user ? (
           <>
             <li className="py-2 px-4">
-              <span className="text-xl font-bold italic text-white">
-                {user.email}
-              </span>
+              <span className="text-xl font-bold italic text-white">{user.email}</span>
             </li>
             <li className="py-2 px-4">
               <button
@@ -113,7 +133,7 @@ const Navbar = () => {
               <a
                 href="/login"
                 className="text-xl font-bold text-white hover:text-primary duration-300"
-                onClick={() => handleNavClick("/login")}
+                onClick={() => handleNavClick('/login')}
               >
                 LOGIN
               </a>
@@ -122,7 +142,7 @@ const Navbar = () => {
               <a
                 href="/register"
                 className="text-xl font-bold text-white hover:text-primary duration-300"
-                onClick={() => handleNavClick("/register")}
+                onClick={() => handleNavClick('/register')}
               >
                 CREAR CUENTA
               </a>
