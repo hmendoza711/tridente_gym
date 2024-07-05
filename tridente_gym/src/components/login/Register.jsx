@@ -1,6 +1,8 @@
-import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
+import { addDoc, collection } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { db } from '../../firebase/config';
+
+
 
 const Register = () => {
   const [password, setPassword] = useState('');
@@ -9,11 +11,11 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
+    try {
       // Crear el usuario
       const docRef = await addDoc(collection(db, 'users'), {
         email,
-        password,
-        rol: 'user',
+        password
       });
       console.log('Usuario creado con ID:', docRef.id);
 
@@ -23,6 +25,10 @@ const Register = () => {
       // Limpiar los campos
       setEmail('');
       setPassword('');
+    } catch (error) {
+      console.error('Error al crear el usuario:', error);
+      alert('Error al crear el usuario');
+    }
   };
 
   return (
