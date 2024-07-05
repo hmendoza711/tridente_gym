@@ -55,7 +55,7 @@ function App() {
           <Routes>
             <Route path="/" element={<MainContent />} />
             <Route path="/contacto" element={<Contacto />} />
-            <Route path="/clases" element={<ProtectedRoute component={ManageUsers} />} />
+            <Route path="/usuarios" element={<ProtectedRoute component={ManageUsers} />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Routes>
