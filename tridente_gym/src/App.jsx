@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
-import Navbar from "./components/navbar/Navbar";
+import Professor from "./components/professor/Professor";
 import Activity from "./components/activity/Activity";
 import Footer from "./components/footer/Footer";
 import ImcCalculator from "./components/imcCalculator/ImcCalculator";
+import Body from "./components/body/Body";
+import Navbar from "./components/navbar/Navbar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 
 function App () {
   useEffect(() => {
@@ -18,18 +21,40 @@ function App () {
     AOS.refresh();
   }, []);
 
+
   const MainContent = () => (
     <div className="dark:bg-dark">
-      <ImcCalculator />
+      <Body />
+      <ImcCalculator /> {/* Renderizar ImcCalculator debajo de Body */}
+      <Activity />
+      <Professor />
     </div>
-  )
+  );
+
+  const Contacto = () => (
+    <div className="dark:bg-dark">
+      <Body />
+    </div>
+  );
+  
+  const Clases = () => (
+    <div className="dark:bg-dark">
+      <Body />
+      <Activity />
+    </div>
+  );
 
   return (
     <div className=" text-black overflow-x-hidden dark:bg-black">
-      <Navbar />
-      <MainContent />
-      <Activity />
-      <Footer />
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<MainContent />} />
+          <Route path="/contacto" element={<Contacto />} />
+          <Route path="/clases" element={<Clases />} />
+        </Routes>
+        <Footer />
+      </Router>
     </div>
   );
 };
