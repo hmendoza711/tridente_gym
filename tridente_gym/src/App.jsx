@@ -16,6 +16,7 @@ import { db } from "./firebase/config";
 import Activities from "./components/activities/Activities";
 import ManageActivities from "./components/manageActivities/ManageActivities";
 import Cart from "./components/cart/Cart";
+import { collection, getDocs } from "firebase/firestore";
 
 function App() {
   useEffect(() => {
@@ -57,26 +58,26 @@ function App() {
 
   const Contacto = () => (
     <div className="dark:bg-dark">
-      <Body />
-    </div>
-  );
-
-  const Clases = () => (
-    <div className="dark:bg-dark">
-      <Body />
+      <Footer />
     </div>
   );
 
   return (
-    <div className=" text-black overflow-x-hidden dark:bg-black">
+    <div className="dark:bg-dark">
       <AuthenticationContextProvider>
         <Router>
           <Navbar />
           <Routes>
             <Route path="/" element={<MainContent />} />
             <Route path="/contacto" element={<Contacto />} />
-            <Route path="/clases" element={<ProtectedRoute component={ManageActivities} />} />
-            <Route path="/usuarios" element={<ProtectedRoute component={ManageUsers} />} />
+            <Route
+              path="/clases"
+              element={<ProtectedRoute component={ManageActivities} />}
+            />
+            <Route
+              path="/usuarios"
+              element={<ProtectedRoute component={ManageUsers} />}
+            />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/cart" element={<Cart />} />
@@ -86,6 +87,6 @@ function App() {
       </AuthenticationContextProvider>
     </div>
   );
-}
+};
 
 export default App;
