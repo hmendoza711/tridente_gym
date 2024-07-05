@@ -98,7 +98,7 @@ const skillsData = [
 const Activity = () => {
   return (
     <>
-      <span id="about"></span>
+      <span id="activity"></span>
       <div className="dark:bg-black kpy-14 sm:min-h-[600px] sm:grid sm:place-items-center p-6">
         <div className="container">
           <div className="pb-12">
