@@ -1,6 +1,6 @@
 # Trydente Gym Web
 
-Proyecto realizado para la cátedra Laboratorio de Computación III de la Tecnicatura Universitaria en Programación
+Proyecto realizado para la cátedra Laboratorio de Computación III de la Tecnicatura Universitaria en Programación UTN Rosario
 
 **Autores:**
 - Macieyko, Pablo Iván
