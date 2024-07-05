@@ -5,7 +5,7 @@ import { db } from '../../firebase/config';
 import { AuthenticationContext } from '../../services/authenticationContext/AuthenticationContext';
 
 const ActivityItem = ({ id, name, price, description, enrolledUsers }) => {
-  const { user } = useContext(AuthenticationContext);
+  const { user, isAdmin, isProfe } = useContext(AuthenticationContext);
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [message, setMessage] = useState('');
 
@@ -16,6 +16,16 @@ const ActivityItem = ({ id, name, price, description, enrolledUsers }) => {
   }, [enrolledUsers, user]);
 
   const handleEnroll = async () => {
+    if (!user) {
+      setMessage('PRIMERO DEBES LOGUEARTE');
+      return;
+    }
+    
+    if (isAdmin || isProfe) {
+      setMessage('Solo los usuarios pueden inscribirse en actividades.');
+      return;
+    }
+
 
     try {
       const activityDoc = doc(db, 'activities', id);
