@@ -4,6 +4,8 @@ import "aos/dist/aos.css";
 
 import Navbar from "./components/navbar/Navbar";
 import Activity from "./components/activity/Activity";
+import Footer from "./components/footer/Footer";
+import ImcCalculator from "./components/imcCalculator/ImcCalculator";
 
 function App () {
   useEffect(() => {
@@ -15,10 +17,19 @@ function App () {
     });
     AOS.refresh();
   }, []);
+
+  const MainContent = () => (
+    <div className="dark:bg-dark">
+      <ImcCalculator />
+    </div>
+  )
+
   return (
     <div className=" text-black overflow-x-hidden dark:bg-black">
       <Navbar />
+      <MainContent />
       <Activity />
+      <Footer />
     </div>
   );
 };
