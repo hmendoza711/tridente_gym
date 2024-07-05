@@ -67,7 +67,7 @@ ActivityItem.propTypes = {
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
-  enrolledUsers: PropTypes.arrayOf(PropTypes.string).isRequired,
+  enrolledUsers: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default ActivityItem;
