@@ -9,9 +9,9 @@ import Body from "./components/body/Body";
 import Navbar from "./components/navbar/Navbar";
 import Login from "./components/login/Login";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthenticationContextProvider } from "./services/authenticationContext/AuthenticationContext";
 
-
-function App () {
+function App() {
   useEffect(() => {
     AOS.init({
       offset: 100,
@@ -21,7 +21,6 @@ function App () {
     });
     AOS.refresh();
   }, []);
-
 
   const MainContent = () => (
     <div className="dark:bg-dark">
@@ -37,7 +36,7 @@ function App () {
       <Body />
     </div>
   );
-  
+
   const Clases = () => (
     <div className="dark:bg-dark">
       <Body />
@@ -47,18 +46,20 @@ function App () {
 
   return (
     <div className=" text-black overflow-x-hidden dark:bg-black">
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<MainContent />} />
-          <Route path="/contacto" element={<Contacto />} />
-          <Route path="/clases" element={<Clases />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-        <Footer />
-      </Router>
+      <AuthenticationContextProvider>
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<MainContent />} />
+            <Route path="/contacto" element={<Contacto />} />
+            <Route path="/clases" element={<Clases />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+          <Footer />
+        </Router>
+      </AuthenticationContextProvider>
     </div>
   );
-};
+}
 
 export default App;
