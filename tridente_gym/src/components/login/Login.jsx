@@ -5,7 +5,7 @@ const Login = () => {
   const { handleLogin } = useContext(AuthenticationContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+
   const onLogin = (e) => {
     e.preventDefault();
     handleLogin(email, password);
