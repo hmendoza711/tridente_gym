@@ -10,6 +10,7 @@ import Navbar from "./components/navbar/Navbar";
 import Login from "./components/login/Login";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthenticationContextProvider } from "./services/authenticationContext/AuthenticationContext";
+import Register from "./components/login/Register";
 
 function App() {
   useEffect(() => {
@@ -54,6 +55,7 @@ function App() {
             <Route path="/contacto" element={<Contacto />} />
             <Route path="/clases" element={<Clases />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
           <Footer />
         </Router>
