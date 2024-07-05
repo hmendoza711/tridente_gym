@@ -15,6 +15,7 @@ import ProtectedRoute from "./components/route/protected/ProtectedRoute";
 import { db } from "./firebase/config";
 import Activities from "./components/activities/Activities";
 import ManageActivities from "./components/manageActivities/ManageActivities";
+import Cart from "./components/cart/Cart";
 
 function App() {
   useEffect(() => {
@@ -78,6 +79,7 @@ function App() {
             <Route path="/usuarios" element={<ProtectedRoute component={ManageUsers} />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/cart" element={<Cart />} />
           </Routes>
           <Footer />
         </Router>
