@@ -1,53 +1,102 @@
+import React, { useState } from "react";
+import { GiHamburgerMenu } from "react-icons/gi";
 import Logo from "../../../public/logo.png";
 
 export const Navlinks = [
   {
     id: 1,
-    name: "CONTACTO",
-    link: "/#services",
+    name: "INICIO",
+    link: "/", // Enlace a la página principal
   },
   {
     id: 2,
-    name: "CLASES",
-    link: "/#about",
+    name: "CONTACTO",
+    link: "#contacto", // Enlace directo al ID de la sección Footer
   },
   {
     id: 3,
+    name: "CLASES",
+    link: "#activity", // Enlace directo al ID de la sección Activity
+  },
+  {
+    id: 4,
     name: "LOGIN",
-    link: "/#join",
+    link: "/login", // Mantenemosss el enlace a la página de Login
   },
 ];
+
 const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const handleNavClick = (link) => {
+    if (link.startsWith("#")) {
+      // Si el enlace es un ID (Contacto o Clases), hacer scroll suave
+      const targetId = link.substring(1); // Eliminar el símbolo #
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    } else if (link === "/login") {
+      // Si el enlace es Login, cerrar el menú y no hacer nada más
+      if (menuOpen) {
+        setMenuOpen(false);
+      }
+    } else {
+      // Si es un enlace externo (como Inicio), simplemente navegar
+      window.location.href = link;
+    }
+  };
 
   return (
-    <div className="w-full dark:text-primary h-24 flex justify-between items-center">
-      <div className="container">
-        <div className="flex justify-between items-center">
-          <div>
-            <img
-              src={Logo}
-              alt="logo gym"
-              className="w-16 sm:w-24 absolute top-0 left-110"/>
-            <div style={{ marginLeft: '110px' }}>
-              <h1 className="text-2xl font-bold">TRIDENTE GYM</h1>
-            </div>
-          </div>
-          <nav className="hidden md:block">
-            <ul className="flex items-center gap-8">
-              {Navlinks.map(({ id, name, link }) => (
-                <li key={id} className="py-4">
-                  <a
-                    href={link}
-                    className="inline-block text-lg font-semibold  hover:text-primary duration-300">
-                    {name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
+    <nav className="flex justify-between items-center p-4 bg-dark text-white">
+      <div className="flex items-center">
+        <a href="/">
+          <img
+            src={Logo}
+            alt="Logo"
+            className="w-16 sm:w-24 transition duration-300 ease-in-out transform hover:scale-150 mr-2 cursor-pointer"
+          />
+        </a>
+        <a
+          href="/"
+          className="text-xl font-bold text-white hover:text-primary duration-500 ease-in transform hover:scale-110 mr-2"
+        >
+          TRIDENTE GYM
+        </a>
       </div>
-    </div>
+      <div className="flex items-center justify-center sm:justify-end mt-4 sm:mt-0">
+        <p className="text-center sm:text-right text-xl font-semibold hover:text-primary">
+          "El esfuerzo de hoy, es la victoria de mañana."
+        </p>
+      </div>
+      <button
+        className="md:hidden text-white focus:outline-none"
+        onClick={toggleMenu}
+      >
+        <GiHamburgerMenu className="h-6 w-6 text-white" />
+      </button>
+      <ul
+        className={`md:flex md:items-center md:w-auto ${
+          menuOpen ? "block" : "hidden"
+        } md:block`}
+      >
+        {Navlinks.map(({ id, name, link }) => (
+          <li key={id} className="py-2 px-4">
+            <a
+              href={link}
+              className="text-xl font-bold text-white hover:text-primary duration-300"
+              onClick={() => handleNavClick(link)}
+            >
+              {name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 };
 

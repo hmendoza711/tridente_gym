@@ -7,6 +7,7 @@ import Footer from "./components/footer/Footer";
 import ImcCalculator from "./components/imcCalculator/ImcCalculator";
 import Body from "./components/body/Body";
 import Navbar from "./components/navbar/Navbar";
+import Login from "./components/login/Login";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 
@@ -52,6 +53,7 @@ function App () {
           <Route path="/" element={<MainContent />} />
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/clases" element={<Clases />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
         <Footer />
       </Router>
