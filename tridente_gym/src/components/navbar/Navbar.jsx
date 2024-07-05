@@ -1,31 +1,23 @@
-import React, { useState } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
-import Logo from "../../../public/logo.png";
+import React, { useContext, useState } from 'react';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import Logo from '../../../public/logo.png';
+import { AuthenticationContext } from '../../services/authenticationContext/AuthenticationContext';
 
-export const Navlinks = [
+const Navlinks = [
   {
     id: 1,
-    name: "INICIO",
-    link: "/", // Enlace a la página principal
+    name: 'INICIO',
+    link: '/',
   },
   {
     id: 2,
-    name: "CONTACTO",
-    link: "#contacto", // Enlace directo al ID de la sección Footer
-  },
-  {
-    id: 3,
-    name: "CLASES",
-    link: "#activity", // Enlace directo al ID de la sección Activity
-  },
-  {
-    id: 4,
-    name: "LOGIN",
-    link: "/login", // Mantenemosss el enlace a la página de Login
+    name: 'CONTACTO',
+    link: '#contacto',
   },
 ];
 
 const Navbar = () => {
+  const { user, handleLogout } = useContext(AuthenticationContext);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -33,20 +25,13 @@ const Navbar = () => {
   };
 
   const handleNavClick = (link) => {
-    if (link.startsWith("#")) {
-      // Si el enlace es un ID (Contacto o Clases), hacer scroll suave
-      const targetId = link.substring(1); // Eliminar el símbolo #
+    if (link.startsWith('#')) {
+      const targetId = link.substring(1);
       const targetElement = document.getElementById(targetId);
       if (targetElement) {
-        targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    } else if (link === "/login") {
-      // Si el enlace es Login, cerrar el menú y no hacer nada más
-      if (menuOpen) {
-        setMenuOpen(false);
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     } else {
-      // Si es un enlace externo (como Inicio), simplemente navegar
       window.location.href = link;
     }
   };
@@ -70,7 +55,7 @@ const Navbar = () => {
       </div>
       <div className="flex items-center justify-center sm:justify-end mt-4 sm:mt-0">
         <p className="text-center sm:text-right text-xl font-semibold hover:text-primary">
-          "El esfuerzo de hoy, es la victoria de mañana."
+          El esfuerzo de hoy, es la victoria de mañana!
         </p>
       </div>
       <button
@@ -81,7 +66,7 @@ const Navbar = () => {
       </button>
       <ul
         className={`md:flex md:items-center md:w-auto ${
-          menuOpen ? "block" : "hidden"
+          menuOpen ? 'block' : 'hidden'
         } md:block`}
       >
         {Navlinks.map(({ id, name, link }) => (
@@ -95,6 +80,43 @@ const Navbar = () => {
             </a>
           </li>
         ))}
+
+        {user ? (
+          <>
+            <li className="py-2 px-4">
+              <span className="text-xl font-bold italic text-white">{user.email}</span>
+            </li>
+            <li className="py-2 px-4">
+              <button
+                className="text-xl font-bold italic text-white hover:text-primary duration-300"
+                onClick={handleLogout}
+              >
+                Cerrar Sesión
+              </button>
+            </li>
+          </>
+        ) : (
+          <>
+            <li className="py-2 px-4">
+              <a
+                href="/login"
+                className="text-xl font-bold text-white hover:text-primary duration-300"
+                onClick={() => handleNavClick('/login')}
+              >
+                LOGIN
+              </a>
+            </li>
+            <li className="py-2 px-4">
+              <a
+                href="/register"
+                className="text-xl font-bold text-white hover:text-primary duration-300"
+                onClick={() => handleNavClick('/register')}
+              >
+                CREAR CUENTA
+              </a>
+            </li>
+          </>
+        )}
       </ul>
     </nav>
   );
