@@ -28,9 +28,9 @@ const activityFormReducer = (state, action) => {
         description: action.value,
         formValid: action.value && state.name && state.price,
       };
-    case 'SET_FORM':
+    case 'SET_FORM': 
       return {
-        ...action.payload,
+        ...action.payload, //contiene los datos de la actividad seleccionada.
         formValid: action.payload.name && action.payload.price && action.payload.description,
       };
     case 'RESET_FORM':
@@ -53,9 +53,9 @@ const NewActivity = ({ onActivityDataSaved, selectedActivity }) => {
     }
   }, [selectedActivity]);
 
-  const changeHandler = (event, type) => {
+  const changeHandler = (event, type) => { //captura imputs
     dispatch({
-      type,
+      type, //tipo de accion
       value: event.target.value,
     });
   };

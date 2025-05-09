@@ -10,8 +10,8 @@ const ActivityItem = ({ id, name, price, description, enrolledUsers }) => {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    if (enrolledUsers && user) {
-      setIsEnrolled(enrolledUsers.includes(user.email));
+    if (enrolledUsers && user) { //elrolledUsers son los clientes inscriptos en la actividad y user el el usuario logeado
+      setIsEnrolled(enrolledUsers.includes(user.email)); //Comprueba si el email del usuario actual ya está en la lista de inscritos.
     }
   }, [enrolledUsers, user]);
 

@@ -11,7 +11,7 @@ export const AuthenticationContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('user'));
+    const storedUser = JSON.parse(localStorage.getItem('user')); 
     if (storedUser) {
       setUser(storedUser);
       setIsAdmin(storedUser.rol === 'admin');
@@ -24,7 +24,7 @@ export const AuthenticationContextProvider = ({ children }) => {
     setLoading(true);
     try {
       const q = query(collection(db, 'users'), where('email', '==', email), where('password', '==', password));
-      const querySnapshot = await getDocs(q);
+      const querySnapshot = await getDocs(q); //query es una función de Firebase, sirve para construir una consulta a una colección
       if (!querySnapshot.empty) {
         const userData = querySnapshot.docs[0].data();
         setUser(userData);

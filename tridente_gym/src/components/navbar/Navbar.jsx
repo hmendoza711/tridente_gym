@@ -59,7 +59,7 @@ const Navbar = () => {
         </p>
       </div>
       <button
-        className="md:hidden text-white focus:outline-none"
+        className="md:hidden text-white focus:outline-none" //md: 768px
         onClick={toggleMenu}
       >
         <GiHamburgerMenu className="h-6 w-6 text-white" />

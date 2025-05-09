@@ -1,11 +1,14 @@
 import React, { useContext, useState } from "react";
 import { AuthenticationContext } from "../../services/authenticationContext/AuthenticationContext";
 import { useNavigate } from 'react-router-dom';
+import useWindowSize from "../../custom/useWindowSize";
+
 const Login = () => {
   const { handleLogin, isAdmin, isProfe } = useContext(AuthenticationContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { width, height } = useWindowSize();
   
   const onLogin = (e) => {
     e.preventDefault();
@@ -70,6 +73,7 @@ const Login = () => {
             </a>
           </div>
         </form>
+        <p className="text-sm text-white text-center mb-4">Ancho: {width}px - Alto: {height}px</p>
       </div>
     </div>
   );

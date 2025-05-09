@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import Professor from "./components/professor/Professor";
 import Footer from "./components/footer/Footer";
 import ImcCalculator from "./components/imcCalculator/ImcCalculator";
@@ -19,15 +17,6 @@ import Cart from "./components/cart/Cart";
 import { collection, getDocs } from "firebase/firestore";
 
 function App() {
-  useEffect(() => {
-    AOS.init({
-      offset: 100,
-      duration: 800,
-      easing: "ease-in-sine",
-      delay: 100,
-    });
-    AOS.refresh();
-  }, []);
 
   const [activities, setActivities] = useState([]);
 
