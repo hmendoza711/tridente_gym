@@ -12,11 +12,11 @@ import { db } from "../../firebase/config";
 import { AuthenticationContext } from "../../services/authenticationContext/AuthenticationContext";
 
 const ManageActivities = () => {
-  const { isAdmin, isProfe } = useContext(AuthenticationContext);
+  const { isAdmin, isProfe } = useContext(AuthenticationContext); //solo los admin o profes pueden ver esta pag
   const [activities, setActivities] = useState([]);
   const [selectedActivity, setSelectedActivity] = useState(null);
-  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
-  const [activityToDelete, setActivityToDelete] = useState(null);
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false); //muestra modal de confirmacion
+  const [activityToDelete, setActivityToDelete] = useState(null); //por id 
 
   useEffect(() => {
     const fetchActivities = async () => {
@@ -34,16 +34,16 @@ const ManageActivities = () => {
     fetchActivities();
   }, []);
 
-  const saveActivityDataHandler = async (enteredActivityData) => {
+  const saveActivityDataHandler = async (enteredActivityData) => { 
     try {
-      if (selectedActivity) {
+      if (selectedActivity) { //si se edita
         const activityRef = doc(db, "activities", selectedActivity.id);
         await updateDoc(activityRef, enteredActivityData);
         setSelectedActivity(null);
-      } else {
+      } else { //sino se agrega
         await addDoc(collection(db, "activities"), enteredActivityData);
       }
-      const querySnapshot = await getDocs(collection(db, "activities"));
+      const querySnapshot = await getDocs(collection(db, "activities")); //actualiza la lista 
       const activitiesData = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),

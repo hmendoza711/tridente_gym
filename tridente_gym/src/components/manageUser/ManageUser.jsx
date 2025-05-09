@@ -59,12 +59,12 @@ const ManageUsers = () => {
     }
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (id) => { //abre el modal y guarda el ID del usuario a eliminar
     setUserToDelete(id);
     setShowDeleteConfirmation(true);
   };
 
-  const handleEdit = (user) => {
+  const handleEdit = (user) => { //carga los datos del usuario en el formulario para editarlos.
     setSelectedUser(user);
   };
 
@@ -116,7 +116,7 @@ const ManageUsers = () => {
           </div>
         )}
       </div>
-      {showDeleteConfirmation && (
+      {showDeleteConfirmation && ( 
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-8 rounded-lg text-center space-y-4">
             <h2 className="text-xl font-bold">Confirmar Eliminación</h2>
